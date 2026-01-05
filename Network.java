@@ -52,7 +52,7 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        if(getUser(name1) == null || getUser(name2) == null) return false;
+        if(getUser(name1) == null || getUser(name2) == null || getUser(name1).follows(name2) || name1.equals(name2)) return false;
         getUser(name1).addFollowee(name2);
         if(getUser(name1).follows(name2)) return true;
         return false;
@@ -63,7 +63,7 @@ public class Network {
     public String recommendWhoToFollow(String name) {
         User mostRecommendedUserToFollow = new User(null);
         for(int i = 0; i < userCount; i++){
-            if(getUser(name).countMutual(users[i]) >= getUser(name).countMutual(mostRecommendedUserToFollow)
+            if(getUser(name).countMutual(users[i]) > getUser(name).countMutual(mostRecommendedUserToFollow)
             && users[i] != getUser(name)){
                 mostRecommendedUserToFollow = users[i];
             }
