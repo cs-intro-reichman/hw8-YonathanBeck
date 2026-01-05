@@ -63,7 +63,7 @@ public class Network {
     public String recommendWhoToFollow(String name) {
         User mostRecommendedUserToFollow = new User(null);
         for(int i = 0; i < userCount; i++){
-            if(users[i].countMutual(getUser(name)) >= getUser(name).countMutual(mostRecommendedUserToFollow)
+            if(getUser(name).countMutual(users[i]) >= getUser(name).countMutual(mostRecommendedUserToFollow)
             && users[i] != getUser(name)){
                 mostRecommendedUserToFollow = users[i];
             }
